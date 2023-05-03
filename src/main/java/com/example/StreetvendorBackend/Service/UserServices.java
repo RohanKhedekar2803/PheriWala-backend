@@ -32,8 +32,8 @@ public class UserServices {
 			
 		log.info("registering user!!");
 		User user=User.builder()
-				.latitude(requestuser.getLatitude())
-				.longitude(requestuser.getLongitude())
+				.latitude(Double.parseDouble(requestuser.getLatitude()))
+				.longitude(Double.parseDouble(requestuser.getLongitude()))
 				.notificationToken(requestuser.getNotificationToken())
 				.usercontact(requestuser.getUsercontact())
 				.username(username)
@@ -80,8 +80,8 @@ public class UserServices {
 
 	public boolean updatelocation(long userid, RequestUpdateLocation updatedlocation) {
 		User user= userrepopository.findById(userid).orElseThrow( () -> new ProductServiceException("user with this id  not found " ,"USER_NOT_FOUND" ));
-		user.setLatitude(updatedlocation.getLatitude());
-		user.setLongitude(updatedlocation.getLongitude());
+		user.setLatitude(Double.parseDouble(updatedlocation.getLatitude()));
+		user.setLongitude(Double.parseDouble(updatedlocation.getLongitude()));
 		userrepopository.save(user);
 		return true;
 	}

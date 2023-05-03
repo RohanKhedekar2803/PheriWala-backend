@@ -23,7 +23,7 @@ public class User {
 	private long id;
 	
 	@Column(name="user_contact")
-	private long usercontact;
+	private String usercontact;
 	
 	@Column(name="user_name")
 	private String username;

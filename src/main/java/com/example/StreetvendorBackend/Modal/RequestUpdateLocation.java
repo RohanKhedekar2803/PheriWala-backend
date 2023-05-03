@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class RequestUpdateLocation {
- private double latitude;
- private double longitude;
+ private String latitude;
+ private String longitude;
 }

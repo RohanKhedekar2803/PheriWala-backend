@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 public class RequestFilter {
-	private long  nearby=-1;
+	private long  nearby=0;
 	private String area;
 	private String shopname;
 }

@@ -13,10 +13,10 @@ import lombok.NoArgsConstructor;
 @Data
 public class RequestUser {
 
-	private long usercontact;
+	private String usercontact;
 	private String username;
 	private String password;
-	private double latitude;
-	private  double longitude;
+	private String latitude;
+	private  String longitude;
 	private String notificationToken;
 }

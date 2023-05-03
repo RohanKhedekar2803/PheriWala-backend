@@ -70,8 +70,8 @@ public class VendorServices {
 		Vendor vendor=Vendor.builder()
 				.vendorusername(requestvendor.getVendorname())
 				.vendorcontact(requestvendor.getVendorcontact())
-				.latitude(requestvendor.getLatitude())
-				.longitude(requestvendor.getLongitude())
+				.latitude(Double.parseDouble(requestvendor.getLatitude()))
+				.longitude(Double.parseDouble(requestvendor.getLongitude()))
 				.location(requestvendor.getLocation())
 				.shopname(requestvendor.getShopname())
 				.notificationToken(requestvendor.getNotificationToken())
@@ -81,9 +81,9 @@ public class VendorServices {
 		
 		ResponseVendor ven= new ResponseVendor();
 		ven.setId(vendor.getId());
-		ven.setLatitude(vendor.getLatitude());
+		ven.setLatitude(String.valueOf(vendor.getLatitude()));
 		ven.setLocation(vendor.getLocation());
-		ven.setLongitude(vendor.getLongitude());
+		ven.setLongitude(String.valueOf(vendor.getLongitude()));
 		ven.setShopname(vendor.getShopname());
 		ven.setVendorcontact(vendor.getVendorcontact());
 		ven.setVendorname(vendor.getVendorusername());
@@ -119,9 +119,15 @@ public class VendorServices {
 		Vendor vendor=vendorrepository.findById(vendor_id).orElseThrow( () -> new ProductServiceException("vendor id not found " ,"VENDOR_NOT_FOUND" ));
 		log.info("found vendor");
 		Set <Product> s1=productrepository.findAllByVendor(vendor);
+		
+		log.info("all products "+s1);
 		ArrayList<Product> al=new ArrayList<>();
 		
-		al.addAll(s1);
+		for(Product it : s1){
+			al.add(it);
+		}
+			
+	
 		log.info("returned products");
 		return al;
 	}
@@ -243,7 +249,7 @@ public class VendorServices {
 			String vendorusername=it.getVendorusername();
 			String shopname=it.getShopname();
 			String location=it.getLocation();
-			long contact =it.getVendorcontact();
+			String contact =it.getVendorcontact();
 			double latitude=it.getLatitude();
 			double longitude=it.getLongitude();
 			//copy data from vendors to response vendor\
@@ -253,8 +259,8 @@ public class VendorServices {
 					.shopname(shopname)
 					.location(location)
 					.vendorcontact(contact)
-					.latitude(latitude)
-					.longitude(longitude)
+					.latitude(String.valueOf(latitude))
+					.longitude(String.valueOf(longitude))
 					.build();
 			
 			double distnace=help.distance(it.getLatitude(), user.getLatitude(),it.getLongitude(),user.getLongitude(), 0.0, 0.0);
@@ -271,7 +277,9 @@ public class VendorServices {
 				
 				if(it.getLocation().equals(filter.getArea())) {
 					log.info("got entry");
-					double distnace=help.distance(it.getLatitude(), user.getLatitude(),it.getLongitude(),user.getLatitude(), 0.0, 0.0);
+					double vendor_latitude=Double.parseDouble(it.getLatitude());
+					double vendor_longitude=Double.parseDouble(it.getLongitude());
+					double distnace=help.distance(vendor_latitude, user.getLatitude(),vendor_longitude,user.getLongitude(), 0.0, 0.0);
 					
 					filteredvendors.add(it);
 				}
@@ -285,14 +293,15 @@ public class VendorServices {
 				}
 			}
 		}
-		else if(filter.getNearby()!=-1){
+		else if(filter.getNearby()!=0){
 			log.info("nearby filter applying");
 			long filterrange=filter.getNearby();
 			
 			
 			for(filtredVendorResponse it : vendors) {
-				
-				double distnace=help.distance(it.getLatitude(), user.getLatitude(),it.getLongitude(),user.getLongitude(), 0.0, 0.0);
+				double vendor_latitude=Double.parseDouble(it.getLatitude());
+				double vendor_longitude=Double.parseDouble(it.getLongitude());
+				double distnace=help.distance(vendor_latitude, user.getLatitude(),vendor_longitude,user.getLongitude(), 0.0, 0.0);
 				if(filterrange>=distnace) {
 					filteredvendors.add(it);
 				}
@@ -308,8 +317,8 @@ public class VendorServices {
 	
 	public boolean updatelocation(long userid, RequestUpdateLocation updatedlocation) {
 		Vendor v= vendorrepository.findById(userid).orElseThrow( () -> new ProductServiceException("user with this id  not found " ,"USER_NOT_FOUND" ));
-		v.setLatitude(updatedlocation.getLatitude());
-		v.setLongitude(updatedlocation.getLongitude());
+		v.setLatitude(Double.parseDouble(updatedlocation.getLatitude()));
+		v.setLongitude(Double.parseDouble(updatedlocation.getLongitude()));
 		vendorrepository.save(v);
 		return true;
 	}

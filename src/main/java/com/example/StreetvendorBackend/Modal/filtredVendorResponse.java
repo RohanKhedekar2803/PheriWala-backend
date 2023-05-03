@@ -14,11 +14,11 @@ import lombok.NoArgsConstructor;
 @Builder
 public class filtredVendorResponse {
     private Long id;
-	private Long vendorcontact;
+	private String vendorcontact;
 	private String vendorusername;
 	private String shopname;
 	private String location;
-	private double latitude;
-	private  double longitude;
+	private String latitude;
+	private  String longitude;
 	private double distancefromuser;
 }

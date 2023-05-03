@@ -32,7 +32,7 @@ public class Vendor {
 	private Long id;
 	
 	@Column(name="vendor_contact")
-	private Long vendorcontact;
+	private String vendorcontact;
 	
 	@Column(name="vendor_name")
 	private String vendorusername;

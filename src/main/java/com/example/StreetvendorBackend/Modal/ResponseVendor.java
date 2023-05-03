@@ -13,11 +13,11 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ResponseVendor {
 	private Long id;
-	private Long vendorcontact;
+	private String vendorcontact;
 	private String vendorname;
 	private String shopname;
 	private String location;
-	private Double latitude;
-	private  Double longitude;
+	private String latitude;
+	private  String longitude;
 	
 }

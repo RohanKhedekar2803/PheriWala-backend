@@ -8,11 +8,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RequestVendor {
-	private long vendorcontact;
+	private String vendorcontact;
 	private String vendorname;
 	private String shopname;
 	private String location;
-	private double latitude;
-	private double longitude;
+	private String latitude;
+	private String longitude;
 	private String notificationToken;
 }
