@@ -67,9 +67,9 @@ public class VendorController {
 	public ResponseEntity<String> registervendor(@RequestBody RequestVendor requestvendor){
 
 		
-		ResponseEntity<String> s=vendorservice.RegisterVendor(requestvendor);
+		String s=String.valueOf(vendorservice.RegisterVendor(requestvendor));
 		
-		return s;
+		return new ResponseEntity<String>(s, HttpStatus.ACCEPTED);
 	}
 	
 	@PostMapping("/addproduct/{vendorid}")
