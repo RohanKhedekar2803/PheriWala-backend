@@ -3,6 +3,7 @@ package com.example.StreetvendorBackend.Controller;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +16,7 @@ import com.google.firebase.messaging.FirebaseMessagingException;
 
 import lombok.extern.log4j.Log4j2;
 
+@CrossOrigin
 @Log4j2
 @RestController
 @RequestMapping("/notify")

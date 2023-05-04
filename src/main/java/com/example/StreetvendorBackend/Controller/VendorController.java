@@ -21,6 +21,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StreamUtils;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,7 +49,7 @@ import com.example.StreetvendorBackend.Service.VendorServices;
 import lombok.extern.log4j.Log4j2;
 
 
-
+@CrossOrigin
 @RestController
 @RequestMapping("vendor")
 @Log4j2
