@@ -16,7 +16,7 @@ import com.google.firebase.messaging.FirebaseMessagingException;
 
 import lombok.extern.log4j.Log4j2;
 
-@CrossOrigin
+@CrossOrigin("*")
 @Log4j2
 @RestController
 @RequestMapping("/notify")

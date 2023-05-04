@@ -49,7 +49,7 @@ import com.example.StreetvendorBackend.Service.VendorServices;
 import lombok.extern.log4j.Log4j2;
 
 
-@CrossOrigin
+@CrossOrigin("*")
 @RestController
 @RequestMapping("vendor")
 @Log4j2
