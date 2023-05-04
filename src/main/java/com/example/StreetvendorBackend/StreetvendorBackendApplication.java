@@ -19,7 +19,7 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.messaging.FirebaseMessaging;
 
-@CrossOrigin
+@CrossOrigin("*")
 @SpringBootApplication
 public class StreetvendorBackendApplication {
 	
