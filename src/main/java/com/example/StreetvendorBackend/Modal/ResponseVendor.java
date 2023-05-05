@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class ResponseVendor {
-	private Long id;
+	private  int id;
 	private String vendorcontact;
 	private String vendorname;
 	private String shopname;

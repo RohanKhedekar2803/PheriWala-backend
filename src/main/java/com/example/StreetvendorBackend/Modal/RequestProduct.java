@@ -11,5 +11,5 @@ import lombok.NoArgsConstructor;
 @Data
 public class RequestProduct {
 	private String productname;
-	private long price;
+	private int price;
 }

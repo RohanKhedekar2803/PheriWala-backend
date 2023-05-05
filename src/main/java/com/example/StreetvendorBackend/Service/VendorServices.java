@@ -132,7 +132,7 @@ public class VendorServices {
 		Product product=productrepository.findById(product_id).orElseThrow( () -> new ProductServiceException("product id not found " ,"PRODUCT_NOT_FOUND" ));
 		log.info("found product");
 		
-		productrepository.deleteById(product.getProductid());
+		productrepository.deleteById((long) product.getProductid());
 		
 		
 	}
@@ -249,7 +249,7 @@ public class VendorServices {
 			double longitude=it.getLongitude();
 			//copy data from vendors to response vendor\
 			filtredVendorResponse rv =filtredVendorResponse
-					.builder().id(id)
+					.builder().id((int)id)
 					.vendorusername(vendorusername)
 					.shopname(shopname)
 					.location(location)

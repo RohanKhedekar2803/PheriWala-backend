@@ -29,7 +29,7 @@ public class Vendor {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="vendor_id")
-	private Long id;
+	private int id;
 	
 	@Column(name="vendor_contact")
 	private String vendorcontact;

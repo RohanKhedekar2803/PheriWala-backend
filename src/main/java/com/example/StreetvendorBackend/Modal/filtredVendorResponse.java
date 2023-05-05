@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 public class filtredVendorResponse {
-    private Long id;
+    private int id;
 	private String vendorcontact;
 	private String vendorusername;
 	private String shopname;

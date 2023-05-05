@@ -22,9 +22,9 @@ public class Product {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long productid;
+	private int productid;
 	private String productname;
-	private long price;
+	private int price;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	Vendor vendor;
