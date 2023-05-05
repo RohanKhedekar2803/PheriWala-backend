@@ -71,6 +71,7 @@ public class VendorServices {
 				.location(requestvendor.getLocation())
 				.shopname(requestvendor.getShopname())
 				.notificationToken(requestvendor.getNotificationToken())
+				.password(requestvendor.getPassword())
 				.build();
 		if(v.isPresent()) {
 			return "vendor with same username present already";
@@ -80,14 +81,7 @@ public class VendorServices {
 		vendorrepository.save(vendor);
 		log.info("registered vendor!!");
 		
-		ResponseVendor ven= new ResponseVendor();
-		ven.setId(vendor.getId());
-		ven.setLatitude(String.valueOf(vendor.getLatitude()));
-		ven.setLocation(vendor.getLocation());
-		ven.setLongitude(String.valueOf(vendor.getLongitude()));
-		ven.setShopname(vendor.getShopname());
-		ven.setVendorcontact(vendor.getVendorcontact());
-		ven.setVendorname(vendor.getVendorusername());
+		
 		return  Long.toString(vendor.getId());
 	}
 
