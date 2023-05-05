@@ -42,6 +42,7 @@ public class UserServices {
 				.notificationToken(requestuser.getNotificationToken())
 				.build();
 		
+		
 		User r=userrepopository.save(user);
 		log.info("registered user!!");
 		
