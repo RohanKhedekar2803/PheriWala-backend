@@ -20,7 +20,7 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="user_id")
-	private int id;
+	private Long id;
 	
 	@Column(name="user_contact")
 	private String usercontact;
