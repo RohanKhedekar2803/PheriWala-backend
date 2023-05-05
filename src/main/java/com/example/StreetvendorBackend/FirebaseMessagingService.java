@@ -33,17 +33,16 @@ public class FirebaseMessagingService {
                 .builder()
                 .setTitle(notificationmessage.getTitle())
                 .setBody(notificationmessage.getBody())
-                .setImage(notificationmessage.getBody())
                 .build();
 
         Message message = Message
                 .builder()
                 .setToken(notificationmessage.getRecipientToken())
                 .setNotification(notification)
-                .putAllData(notificationmessage.getData())
                 .build();
 
         try {
+        	
         	
         	
         	   firebasemessaging.send(message);

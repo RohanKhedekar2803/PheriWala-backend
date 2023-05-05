@@ -187,8 +187,10 @@ public class VendorServices {
 			// get incoming file name
 			String name=username + "." + "png";
 			
-			//make full path
-			String filepath=path +File.separator+ name;
+			
+			//make full path  
+			String filepath=path +  File.separator + name;
+			
 			
 			//create folder if not created
 			File f=new File(path);
@@ -209,7 +211,9 @@ public class VendorServices {
 			
 			return name;
 		}
-
+	
+	
+	
 	public InputStream getImage(String path,String filename) throws FileNotFoundException {
 		String fullpath=path +File.separator +filename;
 		InputStream is=new 	FileInputStream(fullpath);
@@ -223,6 +227,9 @@ public class VendorServices {
 	}
 
 	public ArrayList<filtredVendorResponse> getVendorDetailsbyfilter(Long userid, RequestFilter filter) {
+		
+		
+		
 		Helper help =new Helper();
 		log.info("getting current user");
 		//gettinmg current user
@@ -248,6 +255,7 @@ public class VendorServices {
 			double latitude=it.getLatitude();
 			double longitude=it.getLongitude();
 			//copy data from vendors to response vendor\
+			
 			filtredVendorResponse rv =filtredVendorResponse
 					.builder().id((int)id)
 					.vendorusername(vendorusername)
@@ -343,8 +351,6 @@ public class VendorServices {
 					.builder()
 					.recipientToken(notificationmessage.getRecipientToken())
 					.title(notificationmessage.getTitle())
-					.body(notificationmessage.getBody())
-					.data(notificationmessage.getData())
 					.build();
 			log.info("sending notification to nearby");
 			try {
