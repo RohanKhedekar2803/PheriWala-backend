@@ -73,8 +73,8 @@ public class VendorController {
 	}
 	
 	@PostMapping("/addproduct/{vendorid}")
-	public String addproduct(@RequestBody RequestProduct product,@PathVariable("vendorid") Long vendor_id) {
-		String b=vendorservice.addproduct(product , vendor_id);
+	public Product addproduct(@RequestBody RequestProduct product,@PathVariable("vendorid") Long vendor_id) {
+		Product b=vendorservice.addproduct(product , vendor_id);
 		
 		return b;
 	}
