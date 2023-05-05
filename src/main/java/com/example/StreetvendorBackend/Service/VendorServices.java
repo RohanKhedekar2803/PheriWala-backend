@@ -85,7 +85,7 @@ public class VendorServices {
 		return  Long.toString(vendor.getId());
 	}
 
-	public boolean addproduct(RequestProduct requestproduct , Long vendorid) {
+	public String addproduct(RequestProduct requestproduct , Long vendorid) {
 
 		log.info("finding vendor");
 		Vendor vendor=vendorrepository.findById(vendorid).orElseThrow( () -> new ProductServiceException("vendor id not found " ,"VENDOR_NOT_FOUND" ));
@@ -96,7 +96,7 @@ public class VendorServices {
 				.vendor(vendor)
 				.build();
 		
-		productrepository.save(product);
+		Product p=productrepository.save(product);
 		
 		log.info("product created");
 		
@@ -105,7 +105,7 @@ public class VendorServices {
 		s.add(product);
 		vendor.setProducts(s);
 		log.info("vendor products updated");
-		return true;
+		return Long.toString(p.getProductid());
 	}
 	
 	public ArrayList<Product> Getproductbyvendorid(Long vendor_id) {
