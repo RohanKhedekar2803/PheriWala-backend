@@ -23,11 +23,11 @@ public class UserServices {
 	@Autowired
 	private UserRepository userrepopository;
 	
-	public ResponseEntity<String> RegisterUser(RequestUser requestuser) {
+	public String RegisterUser(RequestUser requestuser) {
 		String username=requestuser.getUsername();
 		Optional<User> v=userrepopository.findByUsername(username);
 		if(v.isPresent()) {
-			return new ResponseEntity<String>("user with same username exists", HttpStatus.NOT_ACCEPTABLE);
+			return "user with same username exists";
 		}
 			
 		log.info("registering user!!");
@@ -44,7 +44,7 @@ public class UserServices {
 		userrepopository.save(user);
 		log.info("registered user!!");
 		
-		return new ResponseEntity<String>("Done", HttpStatus.OK);
+		return "Done";
 		
 	}
 

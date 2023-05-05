@@ -46,8 +46,8 @@ public class UserController {
 	private VendorServices vendorservices;
 	
 	@PostMapping("/register")
-	public ResponseEntity<String> registervendor(@RequestBody RequestUser requestuser){
-		ResponseEntity<String> s=userservices.RegisterUser(requestuser);		
+	public String registervendor(@RequestBody RequestUser requestuser){
+		String s=userservices.RegisterUser(requestuser);		
 		return s;
 	}
 	
