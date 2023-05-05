@@ -24,6 +24,7 @@ public class UserServices {
 	private UserRepository userrepopository;
 	
 	public String RegisterUser(RequestUser requestuser) {
+		log.info("registering" + requestuser);
 		String username=requestuser.getUsername();
 		Optional<User> v=userrepopository.findByUsername(username);
 		if(v.isPresent()) {

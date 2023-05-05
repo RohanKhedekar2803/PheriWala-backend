@@ -154,7 +154,7 @@ public class VendorServices {
 
 			log.info(vendorUsername + "  " + password);  
 			Optional<Vendor> optionalVendor = vendorrepository.findByVendorusernameAndPassword(vendorUsername, password);
-		      if (optionalVendor.isPresent()) {
+		      if (!optionalVendor.isPresent()) {
 		    	  log.info("found ");
 		          Vendor vendor = optionalVendor.get();
 		          return ResponseEntity.ok(vendor);
@@ -288,7 +288,7 @@ public class VendorServices {
 				}
 			}
 		}
-		else if(filter.getNearby()!=0){
+		else if(filter.getNearby()>0){
 			log.info("nearby filter applying");
 			long filterrange=filter.getNearby();
 			
