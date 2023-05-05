@@ -61,6 +61,7 @@ public class UserController {
 	@PutMapping("/changepassword")
 	public  ResponseEntity<User> Changepassword(@RequestBody LoginRequest req) {
 		return userservices.changepassword(req.getUsername(),req.getPassword());
+		
 	}	
 	
 	
