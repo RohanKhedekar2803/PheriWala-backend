@@ -351,6 +351,7 @@ public class VendorServices {
 					.builder()
 					.recipientToken(notificationmessage.getRecipientToken())
 					.title(notificationmessage.getTitle())
+					.body(notificationmessage.getBody())
 					.build();
 			log.info("sending notification to nearby");
 			try {
