@@ -41,10 +41,10 @@ public class UserServices {
 				.notificationToken(requestuser.getNotificationToken())
 				.build();
 		
-		userrepopository.save(user);
+		User r=userrepopository.save(user);
 		log.info("registered user!!");
 		
-		return "Done";
+		return Long.toString(r.getId());
 		
 	}
 
