@@ -150,7 +150,7 @@ public class VendorServices {
 	}
 	
 	public 	ResponseEntity<Vendor> getVendorByVendorUsernameAndPassword(String vendorUsername, String password) {
-
+		log.info("request for loginvendor" + vendorUsername +password);
 
 			log.info(vendorUsername + "  " + password);  
 			Optional<Vendor> optionalVendor = vendorrepository.findByVendorusernameAndPassword(vendorUsername, password);
