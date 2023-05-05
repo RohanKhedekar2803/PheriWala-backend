@@ -67,7 +67,7 @@ public class VendorController {
 	public String registervendor(@RequestBody RequestVendor requestvendor){
 
 		
-		String s=String.valueOf(vendorservice.RegisterVendor(requestvendor));
+		String s=vendorservice.RegisterVendor(requestvendor);
 		
 		return s;
 	}

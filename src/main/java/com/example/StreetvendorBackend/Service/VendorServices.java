@@ -60,7 +60,7 @@ public class VendorServices {
 	@Autowired
 	FirebaseMessagingService firebasemessagingservice;
 	
-	public ResponseEntity<Long> RegisterVendor(RequestVendor requestvendor) {
+	public String RegisterVendor(RequestVendor requestvendor) {
 		String username=requestvendor.getVendorname();
 		Optional<Vendor> v=vendorrepository.findByVendorusername(username);
 		Vendor vendor=Vendor.builder()
@@ -73,7 +73,7 @@ public class VendorServices {
 				.notificationToken(requestvendor.getNotificationToken())
 				.build();
 		if(v.isPresent()) {
-			return new ResponseEntity<Long>(vendor.getId(),HttpStatus.EXPECTATION_FAILED);
+			return "vendor with same username present already";
 		}
 		log.info("registering vendor!!");
 		
@@ -88,7 +88,7 @@ public class VendorServices {
 		ven.setShopname(vendor.getShopname());
 		ven.setVendorcontact(vendor.getVendorcontact());
 		ven.setVendorname(vendor.getVendorusername());
-		return new ResponseEntity<Long>(vendor.getId(), HttpStatus.OK);
+		return  Long.toString(vendor.getId());
 	}
 
 	public boolean addproduct(RequestProduct requestproduct , Long vendorid) {
