@@ -327,7 +327,7 @@ public class VendorServices {
 	}
 
 	public boolean notifynearby(long vendorid, NotificationMessage notificationmessage) {
-		double filterrange =5000.00;
+		double filterrange =10000.00;
 		
 		Vendor currentvendor= vendorrepository.findById(vendorid).orElseThrow( () -> new ProductServiceException("user with this id  not found " ,"USER_NOT_FOUND" ));;
 		
