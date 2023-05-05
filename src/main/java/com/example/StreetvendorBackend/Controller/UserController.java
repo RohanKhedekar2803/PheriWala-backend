@@ -54,6 +54,7 @@ public class UserController {
 	
 	@PostMapping("/")
 	public ResponseEntity<User> loginuser(@RequestBody LoginRequest req){
+		log.info("request for loginuser" + req.getUsername() + req.getPassword());
 		 return userservices.getuserByUsernameAndPassword(req.getUsername(),req.getPassword());
     }
 	
