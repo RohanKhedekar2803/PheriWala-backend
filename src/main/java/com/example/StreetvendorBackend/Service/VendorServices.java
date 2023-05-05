@@ -154,7 +154,7 @@ public class VendorServices {
 
 			log.info(vendorUsername + "  " + password);  
 			Optional<Vendor> optionalVendor = vendorrepository.findByVendorusernameAndPassword(vendorUsername, password);
-		      if (!optionalVendor.isPresent()) {
+		      if (optionalVendor.isPresent()) {
 		    	  log.info("found ");
 		          Vendor vendor = optionalVendor.get();
 		          return ResponseEntity.ok(vendor);
