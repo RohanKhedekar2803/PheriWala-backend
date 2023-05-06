@@ -13,6 +13,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,6 +26,7 @@ public class Product {
 	private Long productid;
 	private String productname;
 	private int price;
+	
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	Vendor vendor;

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,21 +47,34 @@ public class UserController {
 	private VendorServices vendorservices;
 	
 	@PostMapping("/register")
-	public String registervendor(@RequestBody RequestUser requestuser){
+	public  ResponseEntity<String> registervendor(@RequestBody RequestUser requestuser){
 		String s=userservices.RegisterUser(requestuser);		
-		return s;
+		if(s=="user with same username exists") {
+			return new ResponseEntity<String>(s, HttpStatus.NOT_ACCEPTABLE);
+		}
+		return new ResponseEntity<String>(s, HttpStatus.OK);
 	}
 	
 	
 	@PostMapping("/")
 	public ResponseEntity<User> loginuser(@RequestBody LoginRequest req){
 		log.info("request for loginuser" + req.getUsername() + req.getPassword());
-		 return userservices.getuserByUsernameAndPassword(req.getUsername(),req.getPassword());
+		 User user=userservices.getuserByUsernameAndPassword(req.getUsername(),req.getPassword());
+		 if(user==null) {
+			 return new ResponseEntity<User>(user, HttpStatus.NOT_ACCEPTABLE);
+		 }
+		 return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 	
 	@PutMapping("/changepassword")
 	public  ResponseEntity<User> Changepassword(@RequestBody LoginRequest req) {
-		return userservices.changepassword(req.getUsername(),req.getPassword());
+		User user=userservices.changepassword(req.getUsername(),req.getPassword());
+		
+		 if(user==null) {
+			 return new ResponseEntity<User>(user, HttpStatus.NOT_ACCEPTABLE);
+		 }
+		 return new ResponseEntity<User>(user, HttpStatus.OK);
+		 
 		
 	}	
 	

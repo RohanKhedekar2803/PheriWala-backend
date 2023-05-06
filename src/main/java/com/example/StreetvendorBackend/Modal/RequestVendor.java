@@ -16,4 +16,6 @@ public class RequestVendor {
 	private String longitude;
 	private String notificationToken;
 	private String password;
+	private String image;
 }
+

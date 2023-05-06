@@ -64,16 +64,20 @@ public class VendorController {
 	private VendorRepository vendorrepoisitory; 	
 	
 	@PostMapping("/register")
-	public String registervendor(@RequestBody RequestVendor requestvendor){
+	public ResponseEntity<String> registervendor(@RequestBody RequestVendor requestvendor){
 
 		
 		String s=vendorservice.RegisterVendor(requestvendor);
+		if(s=="vendor with same username present already") {
+			return new ResponseEntity<String>(s, HttpStatus.NOT_ACCEPTABLE);
+		}
 		
-		return s;
+		return new ResponseEntity<String>(s, HttpStatus.HTTP_VERSION_NOT_SUPPORTED.OK);
 	}
 	
 	@PostMapping("/addproduct/{vendorid}")
 	public Product addproduct(@RequestBody RequestProduct product,@PathVariable("vendorid") Long vendor_id) {
+
 		Product b=vendorservice.addproduct(product , vendor_id);
 		
 		return b;
@@ -104,16 +108,25 @@ public class VendorController {
 	@PostMapping("/")
 	public ResponseEntity<Vendor> login(@RequestBody LoginRequest req){
 
-		 return vendorservice.getVendorByVendorUsernameAndPassword(req.getUsername(),req.getPassword());
-    }
+		 Vendor v=vendorservice.getVendorByVendorUsernameAndPassword(req.getUsername(),req.getPassword());
+		 if(v!=null) {
+			 return new ResponseEntity<Vendor>(v,HttpStatus.OK);
+		 }
+		 return new ResponseEntity<Vendor>(v,HttpStatus.NOT_ACCEPTABLE);
+	}
 	
 	@PutMapping("/changepassword")
 	public  ResponseEntity<Vendor> Changepassword(@RequestBody LoginRequest req) {
-		return vendorservice.changepassword(req.getUsername(),req.getPassword());
-		
+		Vendor v= vendorservice.changepassword(req.getUsername(),req.getPassword());
+		if(v!=null) {
+			return new ResponseEntity<Vendor>(v,HttpStatus.OK);
+		}
+		return new ResponseEntity<Vendor>(v,HttpStatus.NOT_ACCEPTABLE);
 	}
+	
 	@Value("${project.image}")
 	private String path;
+
 	
 	@PostMapping("/upload/{username}")
 	public ResponseEntity<FileResponse> fileupload(@RequestParam("image") MultipartFile image ,

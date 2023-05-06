@@ -72,6 +72,7 @@ public class VendorServices {
 				.shopname(requestvendor.getShopname())
 				.notificationToken(requestvendor.getNotificationToken())
 				.password(requestvendor.getPassword())
+				.image(requestvendor.getImage())
 				.build();
 		if(v.isPresent()) {
 			return "vendor with same username present already";
@@ -149,7 +150,7 @@ public class VendorServices {
 		return productrepository.save(product);
 	}
 	
-	public 	ResponseEntity<Vendor> getVendorByVendorUsernameAndPassword(String vendorUsername, String password) {
+	public 	Vendor getVendorByVendorUsernameAndPassword(String vendorUsername, String password) {
 		log.info("request for loginvendor" + vendorUsername +password);
 
 			log.info(vendorUsername + "  " + password);  
@@ -157,24 +158,24 @@ public class VendorServices {
 		      if (optionalVendor.isPresent()) {
 		    	  log.info("found ");
 		          Vendor vendor = optionalVendor.get();
-		          return ResponseEntity.ok(vendor);
+		          return vendor;
 		      } else {
 		    	  log.info("not found");
-		          return ResponseEntity.notFound().build();
+		          return null;
 		      } 	
 		}
 	
-	public ResponseEntity<Vendor> changepassword(String vendorusername, String password) {
+	public Vendor changepassword(String vendorusername, String password) {
 		Optional<Vendor> optionalVendor = vendorrepository.findByVendorusername(vendorusername);
 		if (optionalVendor.isPresent()) {
 	    	  log.info("found");
 	    	  Vendor v=optionalVendor.get();
 	    	  v.setPassword(password);
 	    	  vendorrepository.save(v);
-	          return ResponseEntity.ok(v);
+	          return v;
 	      } else {
 	    	  log.info("not found");
-	          return ResponseEntity.notFound().build();
+	          return null;
 	      } 	
 		
 	}
@@ -211,9 +212,7 @@ public class VendorServices {
 			
 			return name;
 		}
-	
-	
-	
+
 	public InputStream getImage(String path,String filename) throws FileNotFoundException {
 		String fullpath=path +File.separator +filename;
 		InputStream is=new 	FileInputStream(fullpath);
@@ -264,6 +263,7 @@ public class VendorServices {
 					.vendorcontact(contact)
 					.latitude(String.valueOf(latitude))
 					.longitude(String.valueOf(longitude))
+					.image(it.getImage())
 					.build();
 			
 			double distnace=help.distance(it.getLatitude(), user.getLatitude(),it.getLongitude(),user.getLongitude(), 0.0, 0.0);
@@ -327,7 +327,7 @@ public class VendorServices {
 	}
 
 	public boolean notifynearby(long vendorid, NotificationMessage notificationmessage) {
-		double filterrange =10000.00;
+		double filterrange =3000.00;
 		
 		Vendor currentvendor= vendorrepository.findById(vendorid).orElseThrow( () -> new ProductServiceException("user with this id  not found " ,"USER_NOT_FOUND" ));;
 		
@@ -349,13 +349,12 @@ public class VendorServices {
 			
 			NotificationMessage message= NotificationMessage
 					.builder()
-					.recipientToken(notificationmessage.getRecipientToken())
 					.title(notificationmessage.getTitle())
 					.body(notificationmessage.getBody())
 					.build();
 			log.info("sending notification to nearby");
 			try {
-				String  b=firebasemessagingservice.sendNotificationbyToken(message);
+				String  b=firebasemessagingservice.sendNotificationbyToken(message,it.getNotificationToken());
 			} catch (FirebaseMessagingException e) {
 				// TODO Auto-generated catch block
 				log.info("error in snding notification to nearby");

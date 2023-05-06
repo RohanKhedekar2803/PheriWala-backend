@@ -24,6 +24,7 @@ public class UserServices {
 	private UserRepository userrepopository;
 	
 	public String RegisterUser(RequestUser requestuser) {
+
 		log.info("registering" + requestuser);
 		String username=requestuser.getUsername();
 		Optional<User> v=userrepopository.findByUsername(username);
@@ -51,31 +52,32 @@ public class UserServices {
 	}
 
 	
-	public ResponseEntity<User> getuserByUsernameAndPassword(String username, String password) {
+	public User getuserByUsernameAndPassword(String username, String password) {
 		log.info(username + "  " + password);  
 		Optional<User> optionaluser = userrepopository.findByUsernameAndPassword(username, password);
 	      if (optionaluser.isPresent()) {
 	    	  log.info("found ");
 	          User user = optionaluser.get();
-	          return ResponseEntity.ok(user);
+	          return user;
 	      } else {
 	    	  log.info("not found");
-	          return ResponseEntity.notFound().build();
+	          return null;
 	      } 	
 	}
 
 
-	public ResponseEntity<User> changepassword(String username, String password) {
+	public User changepassword(String username, String password) {
+
 		Optional<User> optionalUser = userrepopository.findByUsername(username);
 		if (optionalUser.isPresent()) {
 	    	  log.info("found");
-	    	  User v=optionalUser.get();
-	    	  v.setPassword(password);
-	    	  userrepopository.save(v);
-	          return ResponseEntity.ok(v);
+	    	  User user=optionalUser.get();
+	    	  user.setPassword(password);
+	    	  userrepopository.save(user);
+	          return user;
 	      } else {
 	    	  log.info("not found");
-	          return ResponseEntity.notFound().build();
+	    	  return null;
 	      } 	
 	}
 

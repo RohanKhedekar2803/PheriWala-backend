@@ -24,10 +24,10 @@ public class NotifyController {
 	@Autowired
 	FirebaseMessagingService firebasemessagingservice;
 	
-	@PostMapping("/send-notification")
-	public String sendNotification(@RequestBody NotificationMessage notificationmessage ) throws FirebaseMessagingException {
-		return firebasemessagingservice.sendNotificationbyToken(notificationmessage);
-	}
+//	@PostMapping("/send-notification")
+//	public String sendNotification(@RequestBody NotificationMessage notificationmessage ) throws FirebaseMessagingException {
+//		return firebasemessagingservice.sendNotificationbyToken(notificationmessage);
+//	}
 	
 	
 }

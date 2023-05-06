@@ -23,7 +23,7 @@ public class FirebaseMessagingService {
 		this.firebasemessaging=firebasemessaging;
 	}
 	
-	public String sendNotificationbyToken(NotificationMessage notificationmessage) throws FirebaseMessagingException {
+	public String sendNotificationbyToken(NotificationMessage notificationmessage,String recipientToken) throws FirebaseMessagingException {
 //		log.info("");
 	
 
@@ -37,7 +37,7 @@ public class FirebaseMessagingService {
 
         Message message = Message
                 .builder()
-                .setToken(notificationmessage.getRecipientToken())
+                .setToken(recipientToken)
                 .setNotification(notification)
                 .build();
 

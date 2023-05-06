@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class NotificationMessage {
-	private String recipientToken;
+//	private String recipientToken;
 	private String title;
 	private String body;
 
