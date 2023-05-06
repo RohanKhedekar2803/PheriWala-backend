@@ -71,8 +71,11 @@ public class VendorController {
 		if(s=="vendor with same username present already") {
 			return new ResponseEntity<String>(s, HttpStatus.NOT_ACCEPTABLE);
 		}
+		if(s=="vendor with same contact number exists") {
+			return new ResponseEntity<String>(s, HttpStatus.CONFLICT);
+		}
 		
-		return new ResponseEntity<String>(s, HttpStatus.HTTP_VERSION_NOT_SUPPORTED.OK);
+		return new ResponseEntity<String>(s, HttpStatus.OK);
 	}
 	
 	@PostMapping("/addproduct/{vendorid}")

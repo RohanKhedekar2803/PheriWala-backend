@@ -1,5 +1,6 @@
 package com.example.StreetvendorBackend.Service;
 
+import java.util.ArrayList;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,7 +32,14 @@ public class UserServices {
 		if(v.isPresent()) {
 			return "user with same username exists";
 		}
-			
+		 ArrayList<User> userlist = (ArrayList<User>) userrepopository.findAll();
+		for(User it :userlist) {
+			if(it.getUsercontact().equals(requestuser.getUsercontact())) {
+				return "user with same contact number exists";
+			}
+		}
+		 
+		 
 		log.info("registering user!!");
 		User user=User.builder()
 				.latitude(Double.parseDouble(requestuser.getLatitude()))

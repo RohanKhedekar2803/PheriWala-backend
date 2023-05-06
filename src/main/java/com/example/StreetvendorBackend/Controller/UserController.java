@@ -52,6 +52,9 @@ public class UserController {
 		if(s=="user with same username exists") {
 			return new ResponseEntity<String>(s, HttpStatus.NOT_ACCEPTABLE);
 		}
+		if(s=="user with same contact number exists") {
+			return new ResponseEntity<String>(s, HttpStatus.CONFLICT);
+		}
 		return new ResponseEntity<String>(s, HttpStatus.OK);
 	}
 	

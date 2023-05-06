@@ -68,8 +68,8 @@ public class VendorServices {
 				.vendorcontact(requestvendor.getVendorcontact())
 				.latitude(Double.parseDouble(requestvendor.getLatitude()))
 				.longitude(Double.parseDouble(requestvendor.getLongitude()))
-				.location(requestvendor.getLocation())
-				.shopname(requestvendor.getShopname())
+				.location(requestvendor.getLocation().toLowerCase())
+				.shopname(requestvendor.getShopname().toLowerCase())
 				.notificationToken(requestvendor.getNotificationToken())
 				.password(requestvendor.getPassword())
 				.image(requestvendor.getImage())
@@ -77,6 +77,14 @@ public class VendorServices {
 		if(v.isPresent()) {
 			return "vendor with same username present already";
 		}
+		 ArrayList<Vendor> vendorlist = (ArrayList<Vendor>) vendorrepository.findAll();
+			for(Vendor it :vendorlist) {
+				if(it.getVendorcontact().equals(requestvendor.getVendorcontact())) {
+					return "vendor with same contact number exists";
+				}
+			}
+		
+		
 		log.info("registering vendor!!");
 		
 		vendorrepository.save(vendor);
