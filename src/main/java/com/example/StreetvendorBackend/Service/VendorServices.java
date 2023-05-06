@@ -72,14 +72,16 @@ public class VendorServices {
 				.shopname(requestvendor.getShopname().toLowerCase())
 				.notificationToken(requestvendor.getNotificationToken())
 				.password(requestvendor.getPassword())
-				.image(requestvendor.getImage())
+		
 				.build();
 		if(v.isPresent()) {
+			log.info("already present!!");
 			return "vendor with same username present already";
 		}
 		 ArrayList<Vendor> vendorlist = (ArrayList<Vendor>) vendorrepository.findAll();
 			for(Vendor it :vendorlist) {
 				if(it.getVendorcontact().equals(requestvendor.getVendorcontact())) {
+					log.info("contact present!!");
 					return "vendor with same contact number exists";
 				}
 			}
@@ -271,7 +273,6 @@ public class VendorServices {
 					.vendorcontact(contact)
 					.latitude(String.valueOf(latitude))
 					.longitude(String.valueOf(longitude))
-					.image(it.getImage())
 					.build();
 			
 			double distnace=help.distance(it.getLatitude(), user.getLatitude(),it.getLongitude(),user.getLongitude(), 0.0, 0.0);

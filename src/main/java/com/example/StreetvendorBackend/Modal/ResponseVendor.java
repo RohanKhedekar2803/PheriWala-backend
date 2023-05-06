@@ -19,6 +19,6 @@ public class ResponseVendor {
 	private String location;
 	private String latitude;
 	private  String longitude;
-	private String imgae;
+	
 	
 }

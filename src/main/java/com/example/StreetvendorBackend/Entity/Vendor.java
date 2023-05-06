@@ -58,8 +58,6 @@ public class Vendor {
 	@Column(name="notification_token")
 	private String notificationToken;
 	
-	@Column(name="Encoded_img")
-	private String image;
 	
 	
 		

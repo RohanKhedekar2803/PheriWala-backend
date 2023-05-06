@@ -21,5 +21,5 @@ public class filtredVendorResponse {
 	private String latitude;
 	private  String longitude;
 	private double distancefromuser;
-	private String image;
+	
 }
