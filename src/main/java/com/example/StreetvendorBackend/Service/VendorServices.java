@@ -71,8 +71,7 @@ public class VendorServices {
 				.location(requestvendor.getLocation().toLowerCase())
 				.shopname(requestvendor.getShopname().toLowerCase())
 				.notificationToken(requestvendor.getNotificationToken())
-				.password(requestvendor.getPassword())
-		
+				.password(requestvendor.getPassword()))
 				.build();
 		if(v.isPresent()) {
 			log.info("already present!!");
@@ -89,11 +88,11 @@ public class VendorServices {
 		
 		log.info("registering vendor!!");
 		
-		vendorrepository.save(vendor);
+		Vendor vend =vendorrepository.save(vendor);
 		log.info("registered vendor!!");
 		
 		
-		return  Long.toString(vendor.getId());
+		return  Long.toString(vend.getId());
 	}
 
 	public Product addproduct(RequestProduct requestproduct , Long vendorid) {
