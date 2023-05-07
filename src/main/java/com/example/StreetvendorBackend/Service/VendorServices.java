@@ -265,7 +265,7 @@ public class VendorServices {
 			
 			filtredVendorResponse rv =filtredVendorResponse
 					.builder().id((int)id)
-					.vendorusername(vendorusername)
+					.vendorname(vendorusername)
 					.shopname(shopname)
 					.location(location)
 					.vendorcontact(contact)

@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class filtredVendorResponse {
     private int id;
 	private String vendorcontact;
-	private String vendorusername;
+	private String vendorname;
 	private String shopname;
 	private String location;
 	private String latitude;
