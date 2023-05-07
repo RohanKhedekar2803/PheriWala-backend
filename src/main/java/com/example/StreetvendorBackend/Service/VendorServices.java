@@ -71,7 +71,7 @@ public class VendorServices {
 				.location(requestvendor.getLocation().toLowerCase())
 				.shopname(requestvendor.getShopname().toLowerCase())
 				.notificationToken(requestvendor.getNotificationToken())
-				.password(requestvendor.getPassword()))
+				.password(requestvendor.getPassword())
 				.build();
 		if(v.isPresent()) {
 			log.info("already present!!");
@@ -80,7 +80,6 @@ public class VendorServices {
 		 ArrayList<Vendor> vendorlist = (ArrayList<Vendor>) vendorrepository.findAll();
 			for(Vendor it :vendorlist) {
 				if(it.getVendorcontact().equals(requestvendor.getVendorcontact())) {
-					log.info("contact present!!");
 					return "vendor with same contact number exists";
 				}
 			}
@@ -88,11 +87,11 @@ public class VendorServices {
 		
 		log.info("registering vendor!!");
 		
-		Vendor vend =vendorrepository.save(vendor);
+		vendorrepository.save(vendor);
 		log.info("registered vendor!!");
 		
 		
-		return  Long.toString(vend.getId());
+		return  Long.toString(vendor.getId());
 	}
 
 	public Product addproduct(RequestProduct requestproduct , Long vendorid) {
@@ -111,9 +110,9 @@ public class VendorServices {
 		log.info("product created");
 		
 		
-		Set<Product> s=vendor.getProducts();
-		s.add(product);
-		vendor.setProducts(s);
+//		Set<Product> s=vendor.getProducts();
+//		s.add(product);
+//		vendor.setProducts(s);
 		log.info("vendor products updated");
 		return p;
 	}
