@@ -16,6 +16,12 @@ public interface VendorRepository extends CrudRepository<Vendor, Long>{
 
 	void save(Optional<Vendor> optionalVendor);
 
+	Optional<Vendor> findByVendorcontact(String vendorcontact);
+
+	Optional<Vendor> findByShopname(String shopname);
+
+	Optional<Vendor> findByLocation(String location);
+
 
 
 

@@ -31,12 +31,14 @@ import com.example.StreetvendorBackend.Entity.User;
 import com.example.StreetvendorBackend.Entity.Vendor;
 import com.example.StreetvendorBackend.Exception.ProductServiceException;
 import com.example.StreetvendorBackend.Modal.LoginRequest;
+import com.example.StreetvendorBackend.Modal.ProfileBody;
 import com.example.StreetvendorBackend.Modal.RequestFilter;
 import com.example.StreetvendorBackend.Modal.RequestProduct;
 import com.example.StreetvendorBackend.Modal.RequestUpdateLocation;
 import com.example.StreetvendorBackend.Modal.RequestVendor;
 import com.example.StreetvendorBackend.Modal.ResponseVendor;
 import com.example.StreetvendorBackend.Modal.filtredVendorResponse;
+import com.example.StreetvendorBackend.Modal.profileResponse;
 import com.example.StreetvendorBackend.Repositrory.ProductRepository;
 import com.example.StreetvendorBackend.Repositrory.UserRepository;
 import com.example.StreetvendorBackend.Repositrory.VendorRepository;
@@ -371,6 +373,59 @@ public class VendorServices {
 		
 		return true;
 	}
+
+	public ResponseEntity<profileResponse> updateprofile(ProfileBody profilebody, Long vendorid) {
+		
+		Optional<Vendor> v= vendorrepository.findById(vendorid);
+		
+		if(v.isPresent()) {
+			Vendor vendor=v.get();
+			Optional<Vendor> v1=vendorrepository.findByVendorusername(profilebody.getVendorusername());
+			Optional<Vendor> v2=vendorrepository.findByVendorcontact(profilebody.getVendorcontact());
+			
+			if(v1.isPresent() && v1.get().getId()!=vendor.getId()) {
+				//error
+				return new ResponseEntity<profileResponse>(
+						new profileResponse(false , "Cannot use this vendor username , vendor name with same name already exit." , null		
+										), HttpStatus.BAD_REQUEST);
+				
+			}
+			else {
+				if(v2.isPresent() && v2.get().getId()!=vendor.getId()) {
+					return new ResponseEntity<profileResponse>(
+							new profileResponse(false , "Cannot use this vendor contact , vendor with same contact already exit." , null		
+											), HttpStatus.BAD_REQUEST);
+				}
+				else {
+					
+						
+							vendor.setVendorusername(profilebody.getVendorusername());
+							vendor.setVendorcontact(profilebody.getVendorcontact());
+							vendor.setLocation(profilebody.getLocation());
+							Vendor ven = vendorrepository.save(vendor);
+							return new ResponseEntity<profileResponse>(
+					new profileResponse(true , "" , new ProfileBody(ven.getVendorusername(),ven.getVendorcontact(),ven.getLocation())		
+									), HttpStatus.OK);
+						
+					}
+				
+			}
+			
+			
+			
+			
+			
+			
+		}else {
+			return new ResponseEntity<profileResponse>(
+					new profileResponse(false , "incorrect vendor id." , null		
+									), HttpStatus.BAD_REQUEST);
+		}
+		
+		
+		
+	}
+
 
 	
 }

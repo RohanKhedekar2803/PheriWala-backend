@@ -39,10 +39,12 @@ import com.example.StreetvendorBackend.Entity.User;
 import com.example.StreetvendorBackend.Entity.Vendor;
 import com.example.StreetvendorBackend.Extras.FileResponse;
 import com.example.StreetvendorBackend.Modal.LoginRequest;
+import com.example.StreetvendorBackend.Modal.ProfileBody;
 import com.example.StreetvendorBackend.Modal.RequestProduct;
 import com.example.StreetvendorBackend.Modal.RequestUpdateLocation;
 import com.example.StreetvendorBackend.Modal.RequestVendor;
 import com.example.StreetvendorBackend.Modal.ResponseVendor;
+import com.example.StreetvendorBackend.Modal.profileResponse;
 import com.example.StreetvendorBackend.Repositrory.VendorRepository;
 import com.example.StreetvendorBackend.Service.VendorServices;
 
@@ -167,6 +169,11 @@ public class VendorController {
 			 ArrayList<User> al=new ArrayList<>();
 			 
 				 return vendorservice.notifynearby(vendorid,notificationmessage);
+		 }
+		 @PostMapping("updateprofile/{vendorid}")
+		 public ResponseEntity<profileResponse> updateprofile(@RequestBody ProfileBody profilebody , @PathVariable Long vendorid) {
+			 ResponseEntity<profileResponse> res= vendorservice.updateprofile(profilebody,vendorid);
+			 return res;
 		 }
 	
 }
