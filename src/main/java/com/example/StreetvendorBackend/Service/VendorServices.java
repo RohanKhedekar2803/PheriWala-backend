@@ -15,6 +15,7 @@ import java.util.Set;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -374,6 +375,8 @@ public class VendorServices {
 		return true;
 	}
 
+	@Value("${project.image}")
+	private String path;
 	public ResponseEntity<profileResponse> updateprofile(ProfileBody profilebody, Long vendorid) {
 		
 		Optional<Vendor> v= vendorrepository.findById(vendorid);
@@ -398,7 +401,29 @@ public class VendorServices {
 				}
 				else {
 					
-						
+//						img name change 
+					String name=profilebody.getVendorusername() + "." + "png";
+
+					//make full path  
+					String renamefilepath=path +  File.separator + name;
+					
+					//original 
+					File originalFile = new File(vendor.getVendorusername() + "." + "png");
+					
+					//make full path of original  
+					String originalfilepath=path +  File.separator + originalFile;
+					
+					 File originalFile1 = new File(originalfilepath);
+					 File renameFile = new File(renamefilepath);
+					if (originalFile1.renameTo(renameFile)) {
+				        log.info("File renamed successfully");
+				    } else {
+				    	return new ResponseEntity<profileResponse>(
+								new profileResponse(false , " cannot change image name in directory" , null		
+												), HttpStatus.BAD_REQUEST);
+				    }
+					
+//					
 							vendor.setVendorusername(profilebody.getVendorusername());
 							vendor.setVendorcontact(profilebody.getVendorcontact());
 							vendor.setLocation(profilebody.getLocation());
