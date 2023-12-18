@@ -24,3 +24,6 @@ The Street Vendor Application is built using the following technologies:
 4. Hibernate: An Object-Relational Mapping (ORM) tool for database interaction.
 
 5. Firebase Cloud Messaging Service: A cloud-based messaging service for real-time notifications.
+
+# Access Backend API's deployed on AWS
+http://13.210.142.160:8080/StreetvendorBackend-0.0.1-SNAPSHOT/swagger-ui/index.html
